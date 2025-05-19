@@ -33,6 +33,25 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   await db.query('DELETE FROM movies WHERE id = ?', [id]);
   res.json({ success: true });
+});router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.query('UPDATE movies SET completed = NOT completed WHERE id = ?', [id]);
+  res.json({ success: true });
+});
+
+//update
+router.put('/:name/:id', async (req, res) => {
+  console.log("put")
+  const { name,id } = req.params;
+  await db.query('UPDATE movies SET id = ? WHERE title = ?', [id,name]);
+  res.json({ success: true });
+});
+
+router.put('/r/:id', async (req, res) => {
+  console.log("put2")
+  const { id } = req.params;
+  console.log(id)
+
 });
 
 module.exports = router;
